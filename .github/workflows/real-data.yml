@@ -1,0 +1,30 @@
+name: Public French data integration
+
+# External data availability is outside the unit tests. This is a separate
+# integration workflow that verifies a real run and exposes data-vintage hashes.
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - name: Install analysis package
+        run: python -m pip install -e ".[dev]"
+      - name: Reproduce with fresh public Kenneth French inputs
+        run: python -m empirical_finance.cli
+      - name: Attach analysis outputs and source hashes
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: empirical-finance-public-results
+          path: outputs/
+          retention-days: 14
