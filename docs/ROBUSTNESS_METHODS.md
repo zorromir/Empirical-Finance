@@ -16,4 +16,4 @@ There is no train/test contamination through the same-month return: an automated
 
 ## Data source and results
 
-Run `python -m empirical_finance.cli --robustness`. This creates seven additional CSV outputs in the local `outputs/` directory, including historical source ZIP hashes in the existing manifest. Fresh public data may be revised after the documented run date. No output should be labeled a confirmed empirical result until the real-data integration job passes.
+Run `python -m empirical_finance.cli --robustness`. This creates five additional CSV outputs plus one JSON diagnostic in the local `outputs/` directory, including historical source ZIP hashes in the existing manifest. Fresh public data may be revised after the documented run date. No output should be labeled a confirmed empirical result until the real-data integration job passes.
