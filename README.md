@@ -44,6 +44,12 @@ The final command downloads the required public CSV ZIP archives from Kenneth Fr
 
 Re-run with cached data only (`--offline`) or force redownload (`--refresh`). *The first run requires internet access*. If the data provider changes filenames or availability, the code fails explicitly rather than silently using alternate data.
 
+## Robustness and walk-forward evaluation
+
+Use `python -m empirical_finance.cli --robustness` to add calendar subsamples, HAC bandwidth checks, SDF moment-covariance sensitivity and a lagged-factor walk-forward diagnostic. The diagnostic predicts next-month industry excess returns using *previous-month* factor values, comparing with an expanding historical-mean forecast — not a live strategy.
+
+[Protocol and caveats](docs/ROBUSTNESS_METHODS.md) · [Technical interview guide](docs/INTERVIEW_GUIDE.md)
+
 ## Interpretation and boundaries
 
 - All input returns and model alpha estimates use **decimals** (0.0075 = 0.75% monthly).
