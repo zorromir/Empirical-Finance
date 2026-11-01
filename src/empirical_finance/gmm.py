@@ -11,7 +11,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import numpy as np
-from scipy.optimize import minimize
+from scipy.optimize import least_squares
 from scipy.stats import chi2
 
 from .data import INDUSTRIES
@@ -79,12 +79,28 @@ def two_step_gmm(excess: np.ndarray, market: np.ndarray, *, lags: int = 6,
     identity = np.eye(e.shape[1] + 1)
 
     def estimate(weights: np.ndarray, init: np.ndarray) -> np.ndarray:
-        # Scaling improves optimisation at decimal-return magnitudes.
-        fit = minimize(
-            lambda theta: tuple(1e6 * part for part in _objective(theta, e, f, weights)),
-            init, jac=True, method="BFGS", options={"gtol": 1e-7, "maxiter": 500}
-        )
-        if not np.isfinite(fit.fun) or np.linalg.norm(fit.jac) > 0.1:
+        # Minimize the weighted moment residual directly. A Cholesky-like
+        # symmetric square root is stable even if the weighting matrix is
+        # rank-deficient; a scaled least-squares solve avoids BFGS precision
+        # loss when long-run moment covariances are small.
+        eigenvalues, eigenvectors = np.linalg.eigh((weights + weights.T) / 2.0)
+        root = (eigenvectors * np.sqrt(np.maximum(eigenvalues, 0.0))) @ eigenvectors.T
+
+        def residual(theta: np.ndarray) -> np.ndarray:
+            return root @ moment_matrix(theta, e, f).mean(axis=0)
+
+        def jacobian(theta: np.ndarray) -> np.ndarray:
+            mu, c = theta
+            derivative = np.zeros((e.shape[1] + 1, 2))
+            derivative[:-1, 0] = c * e.mean(axis=0)
+            derivative[:-1, 1] = -((f - mu)[:, None] * e).mean(axis=0)
+            derivative[-1, 0] = -1.0
+            return root @ derivative
+
+        fit = least_squares(residual, init, jac=jacobian, method="trf",
+                            x_scale="jac", max_nfev=1500,
+                            xtol=1e-12, ftol=1e-12, gtol=1e-12)
+        if not fit.success or not np.isfinite(fit.fun).all():
             raise RuntimeError(f"GMM optimisation failed: {fit.message}")
         return np.asarray(fit.x, dtype=float)
 
