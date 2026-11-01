@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "empirical-finance-reproduction"
+version = "0.1.0"
+description = "Public-data factor models, robust inference and SDF GMM"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24,<3", "pandas>=2.0,<3", "scipy>=1.10,<2", "statsmodels>=0.14,<1"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4,<10"]
+
+[project.scripts]
+empirical-finance = "empirical_finance.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
