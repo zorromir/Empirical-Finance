@@ -2,9 +2,13 @@
 
 Independent research-code companion to a **five-person MSc Empirical Finance group study** at Tilburg University (2026).
 
-The original coursework report, co-authors' code, student data and archived numerical files are **not** included. This repository contains an independently written implementation of selected models using freely downloadable public data. It is **not yet a verified reproduction of the original numerical tables**; the source-data vintage and complete result comparison must be checked separately.
+The original coursework report, co-authors' code, student data and archived numerical files are **not** included. This repository contains an independently written implementation of selected models using freely downloadable public data. A **real-data run passed on 1 November 2026** and reproduced the study's central qualitative findings and the SDF GMM J statistic to rounding. Exact numerical equivalence for every original table has **not** been established; data-vintage differences and missing subperiod/restriction tests are documented in [verified results](docs/RESULTS_2026-11-01.md).
 
 [Research summary and previously audited findings](https://github.com/zorromir/zorromir.github.io/blob/main/projects/empirical-finance/README.md) · [Portfolio case study](https://zorromir.github.io/#projects)
+
+## Verified run
+
+[Public-data results, source hashes and comparison cautions](docs/RESULTS_2026-11-01.md). The full run succeeded on the 756-month factor sample, 1,188-month calendar sample and two-step GMM. GitHub Actions also runs separate, offline mathematical tests on Python 3.10 and 3.12.
 
 ## Research question
 
