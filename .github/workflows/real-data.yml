@@ -20,7 +20,7 @@ jobs:
       - name: Install analysis package
         run: python -m pip install -e ".[dev]"
       - name: Reproduce with fresh public Kenneth French inputs
-        run: python -m empirical_finance.cli
+        run: python -m empirical_finance.cli --robustness
       - name: Attach analysis outputs and source hashes
         if: success()
         uses: actions/upload-artifact@v4

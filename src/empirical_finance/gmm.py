@@ -27,6 +27,7 @@ class GMMResult:
     observations: int
     se_mu: float
     se_c: float
+    cov_mu_c: float
 
 
 def moment_matrix(theta: np.ndarray, excess: np.ndarray,
@@ -122,7 +123,8 @@ def two_step_gmm(excess: np.ndarray, market: np.ndarray, *, lags: int = 6,
     se = np.sqrt(np.clip(np.diag(standard), 0.0, np.inf))
     return GMMResult(mu=float(mu), c=float(c), j_stat=j_stat,
                      j_p_value=float(chi2.sf(j_stat, df)), degrees_freedom=df,
-                     observations=int(len(e)), se_mu=float(se[0]), se_c=float(se[1]))
+                     observations=int(len(e)), se_mu=float(se[0]), se_c=float(se[1]),
+                     cov_mu_c=float(standard[0, 1]))
 
 
 def estimate_sdf(sample, *, lags: int = 6, centered: bool = False) -> GMMResult:
