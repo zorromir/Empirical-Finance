@@ -48,7 +48,7 @@ Re-run with cached data only (`--offline`) or force redownload (`--refresh`). *T
 
 Use `python -m empirical_finance.cli --robustness` to add calendar subsamples, HAC bandwidth checks, SDF moment-covariance sensitivity and a lagged-factor walk-forward diagnostic. The diagnostic predicts next-month industry excess returns using *previous-month* factor values, comparing with an expanding historical-mean forecast — not a live strategy.
 
-[Verified robustness results](docs/ROBUSTNESS_RESULTS_2026-11-01.md) · [Protocol and caveats](docs/ROBUSTNESS_METHODS.md) · [Technical interview guide](docs/INTERVIEW_GUIDE.md)
+[Verified robustness results](docs/ROBUSTNESS_RESULTS_2026-11-01.md) · [Protocol and caveats](docs/ROBUSTNESS_METHODS.md)
 
 ## Interpretation and boundaries
 

@@ -72,4 +72,4 @@ RMSE values are in **decimal return units** (e.g. 0.05 is five percentage points
 
 The factor-model in-sample fit improvement and two FF5 alpha rejections are reproducible for these selected settings; they do not imply predictive skill. Calendar effects vary sharply across subperiods. The lagged-factor specification provides little or no incremental forecasting accuracy against a simple feasible benchmark. A strong scientific claim remains limited to the **tested data, moments, assumptions and chosen samples**.
 
-[Methods, limitations and test construction](ROBUSTNESS_METHODS.md) · [Technical interview preparation](INTERVIEW_GUIDE.md)
+[Methods, limitations and test construction](ROBUSTNESS_METHODS.md)
