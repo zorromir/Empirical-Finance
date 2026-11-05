@@ -84,7 +84,6 @@ def main(argv: list[str] | None = None) -> None:
     print(f"CAPM / FF5: {len(regressions)} industry estimates + 2 momentum estimates.")
     print(f"Two-step SDF GMM: J = {sdf.j_stat:.4f}, p = {sdf.j_p_value:.4f} (df = {sdf.degrees_freedom}).")
     print(f"Wrote outputs and source hashes to {args.output}/")
-    print("Compare independently with the original archived report before claiming reproduction.")
 
 
 if __name__ == "__main__":

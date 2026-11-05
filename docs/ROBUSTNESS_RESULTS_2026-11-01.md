@@ -1,6 +1,6 @@
 # Additional results — 1 November 2026
 
-These are checks from the public Python code, not additional results claimed in the [submitted paper](Empirical_finance.pdf).
+These figures come from the public Python code. Some repeat parts of the [paper](Empirical_finance.pdf); others are later checks.
 
 ## Calendar effects by period
 
